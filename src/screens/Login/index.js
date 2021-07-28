@@ -13,7 +13,7 @@ const Login = () => {
         onChangeText={onChangeText}
         placeholder="useless placeholder"
         icon={<Text>SHD</Text>}
-        iconPosition="right"
+        iconPosition="left"
         error="This field is required !"
       />
 
@@ -21,7 +21,7 @@ const Login = () => {
         label="Password"
         onChangeText={onChangeText}
         placeholder="useless placeholder"
-        icon={<Text>SHD</Text>}
+        // icon={<Text>SHD</Text>}
         iconPosition="left"
         // error="This field is required !"
       />

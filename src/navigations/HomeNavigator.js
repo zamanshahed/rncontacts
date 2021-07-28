@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {View, Text, Settings} from 'react-native';
+// import {View, Text, Settings} from 'react-native';
 import {
   CONTACT_DETAIL,
   CONTACT_LIST,

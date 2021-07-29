@@ -9,7 +9,7 @@ import Input from '../common/Input';
 import MainButton from '../common/MainButton';
 import styles from './styles';
 
-const RegisterComponent = () => {
+const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
   const {navigate} = useNavigation();
 
   return (
@@ -29,25 +29,62 @@ const RegisterComponent = () => {
           Please fill up the informations to continue!
         </Text>
         <View>
-          <Input label="Username" placeholder="Enter User name" />
+          <Input
+            label="Username"
+            error={errors.userName}
+            placeholder="Enter User name"
+            onChangeText={value => {
+              onChange({name: 'userName', value});
+            }}
+          />
 
-          <Input label="Email" placeholder="Enter valid email" />
+          <Input
+            label="First name"
+            onChangeText={value => {
+              onChange({name: 'firstName', value});
+            }}
+            error={errors.firstName}
+            placeholder="Enter First name"
+          />
 
-          <Input label="First name" placeholder="Enter First name" />
+          {/* errors={errors.firstName} A SILLY BUG SPOTTED: (-_-) */}
 
-          <Input label="Last name" placeholder="Enter Last name" />
+          <Input
+            label="Last name"
+            onChangeText={value => {
+              onChange({name: 'lastName', value});
+            }}
+            error={errors.lastName}
+            placeholder="Enter Last name"
+          />
+
+          <Input
+            label="Email"
+            onChangeText={value => {
+              onChange({name: 'email', value});
+            }}
+            error={errors.email}
+            placeholder="Enter valid email"
+          />
 
           <Input
             label="Password"
             secureTextEntry={true}
+            onChangeText={value => {
+              onChange({name: 'password', value});
+            }}
+            error={errors.password}
             placeholder="Enter Password"
             icon={<Text>SHOW</Text>}
             iconPosition="right"
           />
+
           {/* custom button  */}
-          <MainButton title="Submit" />
+          <MainButton onPress={onSubmit} title="Submit" />
+
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Text>Already have an account?</Text>
+
             <TouchableOpacity
               onPress={() => {
                 navigate(LOGIN);

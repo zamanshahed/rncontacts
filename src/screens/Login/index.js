@@ -27,7 +27,8 @@ const Login = () => {
         // error="This field is required !"
       />
       {/* custom button  */}
-      <MainButton title="Submit" />
+      <MainButton title="Submit" danger loading />
+      <MainButton title="Login" />
     </Container>
   );
 };

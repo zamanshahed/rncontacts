@@ -3,13 +3,13 @@ import Colors from '../../../assets/theme/colors';
 
 export default StyleSheet.create({
   wrapper: {
-    backgroundColor: Colors.accent,
+    flexDirection: 'row',
     borderWidth: 1,
-    borderColor: Colors.accent,
     borderRadius: 9,
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
+    marginVertical: 8,
   },
   titleStyle: {
     color: Colors.white,

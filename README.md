@@ -1,5 +1,6 @@
-# rncontacts
+# KONTAXTS APP
 
-![Login Screen](./src/assets/images/screenshots/login.png);
+### Screenshots
 
-![Register Screen](./src/assets/images/screenshots/register.jpg);
+<img src="./src/assets/images/screenshots/login.png" width="280" height="auto" />
+<img src="./src/assets/images/screenshots/register.jpg" width="280" height="auto" />

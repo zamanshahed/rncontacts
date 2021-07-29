@@ -3,6 +3,7 @@ import {Text} from 'react-native';
 
 import Container from '../../components/common/Container/index';
 import Input from '../../components/common/Input';
+import MainButton from '../../components/common/MainButton';
 
 const Login = () => {
   const [value, onChangeText] = useState('');
@@ -25,6 +26,8 @@ const Login = () => {
         iconPosition="left"
         // error="This field is required !"
       />
+      {/* custom button  */}
+      <MainButton title="Submit" />
     </Container>
   );
 };

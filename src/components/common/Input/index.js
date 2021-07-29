@@ -12,6 +12,7 @@ const Input = ({
   icon,
   iconPosition,
   error,
+  ...props
 }) => {
   const [focused, setFocused] = useState(false);
 
@@ -55,6 +56,7 @@ const Input = ({
           onBlur={() => {
             setFocused(false);
           }}
+          {...props}
         />
       </View>
       {error && (

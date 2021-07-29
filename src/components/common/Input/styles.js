@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 export default StyleSheet.create({
   inputContainer: {
@@ -8,7 +9,6 @@ export default StyleSheet.create({
     paddingHorizontal: 7,
     borderRadius: 8,
     borderWidth: 1,
-    alignItems: 'center',
   },
   textInput: {
     height: 40,

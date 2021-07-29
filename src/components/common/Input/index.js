@@ -28,7 +28,6 @@ const Input = ({
     if (focused) {
       return colors.primary;
     }
-
     if (error) {
       return colors.danger;
     } else {
@@ -43,10 +42,11 @@ const Input = ({
         style={[
           styles.wrapper,
           {flexDirection: getFlexDirection(), borderColor: getBorderColor()},
+          {alignItems: icon ? 'center' : 'baseline'},
         ]}>
         <View>{icon && icon}</View>
         <TextInput
-          style={[style, styles.textInput]}
+          style={[style, styles.textInput, {width: '100%'}]}
           onChangeText={onChangeText}
           value={value}
           placeholder={placeholder}

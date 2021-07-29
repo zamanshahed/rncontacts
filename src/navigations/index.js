@@ -17,7 +17,7 @@ const AppNavContainer = () => {
     <NavigationContainer>
       {isLoggedIn ? <DrawerNavigator /> : <AuthNavigator />}
 
-      <Text>Binary in my Blood!</Text>
+      {/* <Text>Binary in my Blood!</Text> */}
     </NavigationContainer>
   );
 };

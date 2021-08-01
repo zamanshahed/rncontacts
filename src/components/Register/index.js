@@ -9,7 +9,14 @@ import Input from '../common/Input';
 import MainButton from '../common/MainButton';
 import styles from './styles';
 
-const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
+const RegisterComponent = ({
+  onSubmit,
+  onChange,
+  form,
+  error,
+  loading,
+  errors,
+}) => {
   const {navigate} = useNavigation();
 
   return (
@@ -31,7 +38,7 @@ const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
         <View>
           <Input
             label="Username"
-            error={errors.userName}
+            error={errors.userName || error?.username?.[0]}
             placeholder="Enter User name"
             onChangeText={value => {
               onChange({name: 'userName', value});
@@ -43,7 +50,7 @@ const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
             onChangeText={value => {
               onChange({name: 'firstName', value});
             }}
-            error={errors.firstName}
+            error={errors.firstName || error?.first_name?.[0]}
             placeholder="Enter First name"
           />
 
@@ -54,7 +61,7 @@ const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
             onChangeText={value => {
               onChange({name: 'lastName', value});
             }}
-            error={errors.lastName}
+            error={errors.lastName || error?.last_name?.[0]}
             placeholder="Enter Last name"
           />
 
@@ -63,7 +70,7 @@ const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
             onChangeText={value => {
               onChange({name: 'email', value});
             }}
-            error={errors.email}
+            error={errors.email || error?.email?.[0]}
             placeholder="Enter valid email"
           />
 
@@ -73,14 +80,19 @@ const RegisterComponent = ({onSubmit, onChange, form, errors}) => {
             onChangeText={value => {
               onChange({name: 'password', value});
             }}
-            error={errors.password}
-            placeholder="Enter Password"
+            error={errors.password || error?.password?.[0]}
+            placeholder="Enter Password (min: 8 char..)"
             icon={<Text>SHOW</Text>}
             iconPosition="right"
           />
 
           {/* custom button  */}
-          <MainButton onPress={onSubmit} title="Submit" />
+          <MainButton
+            loading={loading}
+            onPress={onSubmit}
+            disabled={loading}
+            title="Submit"
+          />
 
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Text>Already have an account?</Text>

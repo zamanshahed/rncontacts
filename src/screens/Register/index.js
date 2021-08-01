@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import envs from '../../config/env';
 
 import RegisterComponent from '../../components/Register/index';
 import axiosInstance from '../../context/helpers/axiosInterceptor';
+import register from '../../context/actions/auth/register';
+import {GlobalContext} from '../../context/Provider';
+import authState from '../../context/initialState/authState';
 
 const Register = () => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
-
-  // DEV environment variable urls check up
-  // const {DEV_BACKEND_URL} = envs;
-  // console.log('DEV_BACKEND_URL >>> ', DEV_BACKEND_URL);
-  // console.log('__DEV__: ', __DEV__);
+  const {
+    authDispatch,
+    authState: {error, loading, data},
+  } = useContext(GlobalContext);
 
   React.useEffect(() => {
     axiosInstance.get('/contacts').catch(err => {
@@ -19,14 +21,15 @@ const Register = () => {
     });
   }, []);
 
+  // console.log('authState: ', authState);
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
 
     if (value !== '') {
       if (name === 'password') {
-        if (value.length < 6) {
+        if (value.length < 8) {
           setErrors(prev => {
-            return {...prev, [name]: 'Minimum 6 characters required!'};
+            return {...prev, [name]: 'Minimum 8 characters required!'};
           });
         } else {
           setErrors(prev => {
@@ -47,7 +50,7 @@ const Register = () => {
 
   const onSubmit = () => {
     //validatitions
-    console.log('form: ', form);
+    // console.log('form: ', form);
 
     if (!form.userName) {
       setErrors(prev => {
@@ -78,6 +81,15 @@ const Register = () => {
         return {...prev, password: 'Password is required'};
       });
     }
+
+    if (
+      Object.values(form).length === 5 &&
+      Object.values(form).every(item => item.trim().length > 0) &&
+      Object.values(errors).every(item => !item)
+    ) {
+      console.log('1111: OK', 1111);
+      register(form)(authDispatch);
+    }
   };
 
   return (
@@ -86,6 +98,8 @@ const Register = () => {
       onChange={onChange}
       form={form}
       errors={errors}
+      error={error}
+      loading={loading}
     />
   );
 };

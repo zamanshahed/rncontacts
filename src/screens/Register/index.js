@@ -3,13 +3,15 @@ import envs from '../../config/env';
 
 import RegisterComponent from '../../components/Register/index';
 import axiosInstance from '../../context/helpers/axiosInterceptor';
-import register from '../../context/actions/auth/register';
+import register, {clearAuthState} from '../../context/actions/auth/register';
 import {GlobalContext} from '../../context/Provider';
-import authState from '../../context/initialState/authState';
+import {LOGIN} from '../../constants/routeNames';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 const Register = () => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
+  const {navigate} = useNavigation();
   const {
     authDispatch,
     authState: {error, loading, data},
@@ -21,9 +23,28 @@ const Register = () => {
     });
   }, []);
 
+  React.useEffect(() => {
+    if (data) {
+      navigate(LOGIN);
+    }
+  }, [data]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (data || error) {
+        clearAuthState()(authDispatch);
+      }
+    }, [data, error]),
+  );
+
   // console.log('authState: ', authState);
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
+
+    //console checks
+
+    console.log('data found: ', data);
+    console.log('error: ', error);
 
     if (value !== '') {
       if (name === 'password') {

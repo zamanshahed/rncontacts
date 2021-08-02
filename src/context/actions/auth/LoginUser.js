@@ -27,7 +27,7 @@ export default ({password, userName: username}) =>
           type: LOGIN_FAIL,
           payload: err.response
             ? err.response.data
-            : {error: 'OH CRAP!! LOGIN_FAIL!...'},
+            : {error: 'OH CRAP!! LOGIN_FAIL..'},
         });
       });
   };

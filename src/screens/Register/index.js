@@ -18,8 +18,8 @@ const Register = () => {
   } = useContext(GlobalContext);
 
   React.useEffect(() => {
-    axiosInstance.get('/contacts').catch(err => {
-      console.log('error: ', err.response);
+    axiosInstance.post('/auth/register').catch(err => {
+      console.log('Axios instance error.response: ', err.response);
     });
   }, []);
 
@@ -31,20 +31,19 @@ const Register = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      if (data || error) {
-        clearAuthState()(authDispatch);
-      }
+      console.log('Ghapla Starts...', 10111);
+
+      return () => {
+        console.log('FINISHED Ghapla ...', 90999);
+        if (data || error) {
+          clearAuthState()(authDispatch);
+        }
+      };
     }, [data, error]),
   );
 
-  // console.log('authState: ', authState);
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
-
-    //console checks
-
-    console.log('data found: ', data);
-    console.log('error: ', error);
 
     if (value !== '') {
       if (name === 'password') {
@@ -71,7 +70,6 @@ const Register = () => {
 
   const onSubmit = () => {
     //validatitions
-    // console.log('form: ', form);
 
     if (!form.userName) {
       setErrors(prev => {
@@ -108,7 +106,7 @@ const Register = () => {
       Object.values(form).every(item => item.trim().length > 0) &&
       Object.values(errors).every(item => !item)
     ) {
-      console.log('1111: OK', 1111);
+      console.log('reg-data varified: dispatching!', 1111);
       register(form)(authDispatch);
     }
   };

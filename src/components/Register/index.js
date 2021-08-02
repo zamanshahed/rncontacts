@@ -7,6 +7,7 @@ import {LOGIN} from '../../constants/routeNames';
 import Container from '../common/Container';
 import Input from '../common/Input';
 import MainButton from '../common/MainButton';
+import MainMessage from '../common/Message';
 import styles from './styles';
 
 const RegisterComponent = ({
@@ -35,6 +36,9 @@ const RegisterComponent = ({
         <Text style={styles.subTitle}>
           Please fill up the informations to continue!
         </Text>
+
+        {/* {errors.error && <MainMessage message={errors.error} />} */}
+
         <View>
           <Input
             label="Username"

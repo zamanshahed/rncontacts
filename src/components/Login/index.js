@@ -10,7 +10,7 @@ import Colors from '../../assets/theme/colors';
 import {REGISTER} from '../../constants/routeNames';
 import MainMessage from '../common/Message';
 
-const LoginComponent = () => {
+const LoginComponent = ({error, loading, onSubmit, onChange}) => {
   const {navigate} = useNavigation();
   return (
     <Container>
@@ -27,30 +27,26 @@ const LoginComponent = () => {
         <Text style={styles.title}>Welcome To Kontaxts</Text>
         <Text style={styles.subTitle}>Please Login to continue!</Text>
 
-        <MainMessage
-          retry
-          retryFunction={() => {
-            console.log('Retry Function: OK', 211);
-          }}
-          message="this is an error message"
-          success
-          onDismiss={() => {
-            console.log('Dismiss Fn: OK', 3333);
-          }}
-        />
-        <MainMessage message="this is an error message" primary />
-        <MainMessage message="this is an error message" info />
-        <MainMessage
-          onDismiss={() => {
-            console.log('Dismiss Fn: OK', 3333);
-          }}
-          message="this is an error message"
-          danger
-        />
-        <MainMessage message="this is an error message" />
+        {/* error messages */}
+        {error && (
+          <MainMessage
+            message="invalid credentials!"
+            danger
+            onDismiss={() => {
+              // console.log('Dismiss Fn: OK', 3333);
+            }}
+          />
+        )}
 
         <View>
-          <Input label="Username" placeholder="Enter User name" />
+          <Input
+            label="Username"
+            placeholder="Enter User name"
+            onChangeText={value => {
+              onChange({name: 'userName', value});
+            }}
+            error={error?.username?.[0]}
+          />
 
           <Input
             label="Password"
@@ -58,9 +54,19 @@ const LoginComponent = () => {
             placeholder="Enter Password"
             icon={<Text>SHOW</Text>}
             iconPosition="right"
+            onChangeText={value => {
+              onChange({name: 'password', value});
+            }}
+            error={error?.password?.[0]}
           />
           {/* custom button  */}
-          <MainButton title="Login" />
+          <MainButton
+            title="Login"
+            disabled={loading}
+            loading={loading}
+            onPress={onSubmit}
+          />
+
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Text>Need an account?</Text>
             <TouchableOpacity

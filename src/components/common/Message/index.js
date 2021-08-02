@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ActivityIndicator, Text, TouchableOpacity, View} from 'react-native';
 import colors from '../../../assets/theme/colors';
 import Colors from '../../../assets/theme/colors';
@@ -14,6 +14,8 @@ const MainMessage = ({
   retryFunction,
   onDismiss,
 }) => {
+  const [userDismissed, setDismissed] = useState(false);
+
   const getBtnColor = () => {
     if (primary) {
       return Colors.primary;
@@ -28,39 +30,49 @@ const MainMessage = ({
     }
   };
   return (
-    <View
-      style={[
-        styles.wrapper,
-        {
-          backgroundColor: getBtnColor(),
-          borderColor: getBtnColor(),
-        },
-        {justifyContent: retry ? 'space-evenly' : 'center'},
-        {
-          justifyContent:
-            typeof onDismiss === 'function' ? 'space-evenly' : 'center',
-        },
-      ]}>
-      <View>
-        <Text style={styles.messageStyle}>{message}</Text>
-      </View>
-      <View>
-        {retry && (
-          <TouchableOpacity onPress={retryFunction}>
-            <Text style={[styles.messageStyle, styles.secondaryBox]}>
-              Retry
-            </Text>
-          </TouchableOpacity>
-        )}
-      </View>
-      <View>
-        <TouchableOpacity onPress={onDismiss}>
-          {typeof onDismiss === 'function' && (
-            <Text style={[styles.messageStyle, styles.secondaryBox]}>X</Text>
-          )}
-        </TouchableOpacity>
-      </View>
-    </View>
+    <>
+      {userDismissed ? null : (
+        <View
+          style={[
+            styles.wrapper,
+            {
+              backgroundColor: getBtnColor(),
+              borderColor: getBtnColor(),
+            },
+            {justifyContent: retry ? 'space-evenly' : 'center'},
+            {
+              justifyContent:
+                typeof onDismiss === 'function' ? 'space-evenly' : 'center',
+            },
+          ]}>
+          <View>
+            <Text style={styles.messageStyle}>{message}</Text>
+          </View>
+          <View>
+            {retry && (
+              <TouchableOpacity onPress={retryFunction}>
+                <Text style={[styles.messageStyle, styles.secondaryBox]}>
+                  Retry
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                setDismissed(true);
+                onDismiss();
+              }}>
+              {typeof onDismiss === 'function' && (
+                <Text style={[styles.messageStyle, styles.secondaryBox]}>
+                  X
+                </Text>
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+    </>
   );
 };
 

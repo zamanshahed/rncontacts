@@ -8,6 +8,7 @@ import Input from '../../components/common/Input';
 import MainButton from '../../components/common/MainButton';
 import Colors from '../../assets/theme/colors';
 import {REGISTER} from '../../constants/routeNames';
+import MainMessage from '../common/Message';
 
 const LoginComponent = () => {
   const {navigate} = useNavigation();
@@ -25,6 +26,29 @@ const LoginComponent = () => {
       <View>
         <Text style={styles.title}>Welcome To Kontaxts</Text>
         <Text style={styles.subTitle}>Please Login to continue!</Text>
+
+        <MainMessage
+          retry
+          retryFunction={() => {
+            console.log('Retry Function: OK', 211);
+          }}
+          message="this is an error message"
+          success
+          onDismiss={() => {
+            console.log('Dismiss Fn: OK', 3333);
+          }}
+        />
+        <MainMessage message="this is an error message" primary />
+        <MainMessage message="this is an error message" info />
+        <MainMessage
+          onDismiss={() => {
+            console.log('Dismiss Fn: OK', 3333);
+          }}
+          message="this is an error message"
+          danger
+        />
+        <MainMessage message="this is an error message" />
+
         <View>
           <Input label="Username" placeholder="Enter User name" />
 

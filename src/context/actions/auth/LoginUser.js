@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   LOGIN_FAIL,
   LOGIN_LOADING,
@@ -17,6 +18,9 @@ export default ({password, userName: username}) =>
       })
       .then(res => {
         console.log('Login Success: response>>> ', res.data);
+        AsyncStorage.setItem('token', res.data.token);
+        AsyncStorage.setItem('user', JSON.stringify(res.data.user));
+
         dispatch({
           type: LOGIN_SUCCESS,
           payload: res.data,

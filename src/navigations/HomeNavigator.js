@@ -11,6 +11,8 @@ import Contacts from '../screens/Contacts';
 import ContactDetails from '../screens/ContactDetails';
 import CreateContacts from '../screens/CreateContacts';
 import ContactSettings from '../screens/Settings';
+import {Text, TouchableOpacity, View} from 'react-native';
+import colors, {Colors} from '../assets/theme/colors';
 
 const HomeNavigator = () => {
   const HomeStack = createStackNavigator();

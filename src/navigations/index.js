@@ -12,7 +12,7 @@ const AppNavContainer = () => {
     authState: {isLoggedIn},
   } = useContext(GlobalContext);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn);
   const [authLoaded, setAuthLoaded] = useState(false);
 
   //defining the async func outside useEffect cs it's not allowed there
@@ -23,7 +23,7 @@ const AppNavContainer = () => {
         setAuthLoaded(true);
         setIsAuthenticated(true);
       } else {
-        setAuthLoaded(false);
+        setAuthLoaded(true);
         setIsAuthenticated(false);
       }
     } catch (error) {}
@@ -32,7 +32,7 @@ const AppNavContainer = () => {
   //using useEffect to check if something exists in the async storage
   useEffect(() => {
     getUser();
-  }, []);
+  }, [isLoggedIn]);
 
   console.log('isAuthenticated : ', isAuthenticated);
   console.log('isLoggedIn : ', isLoggedIn);
@@ -41,11 +41,7 @@ const AppNavContainer = () => {
     <>
       {authLoaded ? (
         <NavigationContainer>
-          {isAuthenticated || isLoggedIn ? (
-            <DrawerNavigator />
-          ) : (
-            <AuthNavigator />
-          )}
+          {isAuthenticated ? <DrawerNavigator /> : <AuthNavigator />}
 
           {/* <Text>Binary in my Blood!</Text> */}
         </NavigationContainer>

@@ -7,12 +7,30 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Container from '../../components/common/Container';
 import {CONTACT_LIST, SETTINGS} from '../../constants/routeNames';
+import LogoutUser from '../../context/actions/auth/LogoutUser';
 import styles from './styles';
 
-const SideMenu = ({navigation}) => {
+const SideMenu = ({navigation, authDispatch}) => {
+  const userLogoutHandler = () => {
+    navigation.toggleDrawer();
+    Alert.alert('Logout !', 'Are you sure you want to logout?', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+      },
+      {
+        text: 'Yes',
+        onPress: () => {
+          LogoutUser()(authDispatch);
+        },
+      },
+    ]);
+  };
+
   const menuItems = [
     {
       icon: <Text>-</Text>,
@@ -33,6 +51,7 @@ const SideMenu = ({navigation}) => {
       name: 'Logout',
       onPress: () => {
         console.log('Log out clicked..', 5555);
+        userLogoutHandler();
         // navigation.navigate(SETTINGS);
       },
     },

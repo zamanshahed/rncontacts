@@ -6,11 +6,13 @@ import {GlobalContext} from '../../context/Provider';
 
 const Login = () => {
   const [form, setForm] = useState({});
+  const [justSignedUp, setJustSignedUp] = useState(false);
   const {params} = useRoute();
 
   useEffect(() => {
     if (params?.data) {
-      console.log('params: ', params);
+      // console.log('params: ', params);
+      setJustSignedUp(true);
       setForm({...form, userName: params.data.username});
     }
   }, [params]);
@@ -22,6 +24,7 @@ const Login = () => {
 
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
+    setJustSignedUp(false);
   };
 
   const onSubmit = () => {
@@ -35,6 +38,7 @@ const Login = () => {
     <LoginComponent
       onSubmit={onSubmit}
       onChange={onChange}
+      justSignedUp={justSignedUp}
       form={form}
       error={error}
       loading={loading}

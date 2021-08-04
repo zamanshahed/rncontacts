@@ -10,7 +10,14 @@ import Colors from '../../assets/theme/colors';
 import {REGISTER} from '../../constants/routeNames';
 import MainMessage from '../common/Message';
 
-const LoginComponent = ({error, loading, onSubmit, onChange, form}) => {
+const LoginComponent = ({
+  error,
+  loading,
+  onSubmit,
+  onChange,
+  form,
+  justSignedUp,
+}) => {
   const [passShow, setPassShow] = useState(true);
   const {navigate} = useNavigation();
 
@@ -36,11 +43,11 @@ const LoginComponent = ({error, loading, onSubmit, onChange, form}) => {
         <Text style={styles.title}>Welcome To Kontaxts</Text>
         <Text style={styles.subTitle}>Please Login to continue!</Text>
 
-        {/* error messages */}
-        {error && (
+        {/* Custom messages */}
+        {justSignedUp && (
           <MainMessage
-            message="invalid credentials!"
-            danger
+            message="Register Successful ! Login now"
+            info
             onDismiss={() => {
               // console.log('Dismiss Fn: OK', 3333);
             }}

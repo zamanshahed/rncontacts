@@ -12,6 +12,11 @@ import {
 import Container from '../../components/common/Container';
 import {CONTACT_LIST, SETTINGS} from '../../constants/routeNames';
 import LogoutUser from '../../context/actions/auth/LogoutUser';
+
+import Icon from 'react-native-vector-icons/AntDesign';
+import MaterialIconPro from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/Ionicons';
+
 import styles from './styles';
 
 const SideMenu = ({navigation, authDispatch}) => {
@@ -33,21 +38,37 @@ const SideMenu = ({navigation, authDispatch}) => {
 
   const menuItems = [
     {
-      icon: <Text>-</Text>,
+      icon: <Icon size={21} name="contacts" />,
+      name: 'All Contacts',
+    },
+    {
+      icon: <MaterialIcons size={21} name="phone-portrait-outline" />,
+      name: 'Phone Contacts',
+    },
+    {
+      icon: <MaterialIconPro size={21} name="sim" />,
+      name: 'Sim Card Contacts',
+    },
+    {
+      icon: <MaterialIcons size={22} name="ios-list-circle-outline" />,
+      name: 'Categories',
+    },
+    {
+      icon: <Icon size={21} name="home" />,
       name: 'Home',
       onPress: () => {
         navigation.navigate(CONTACT_LIST);
       },
     },
     {
-      icon: <Text>-</Text>,
+      icon: <Icon size={21} name="setting" />,
       name: 'Settings',
       onPress: () => {
         navigation.navigate(SETTINGS);
       },
     },
     {
-      icon: <Text>-</Text>,
+      icon: <Icon size={21} name="logout" />,
       name: 'Logout',
       onPress: () => {
         console.log('Log out clicked..', 5555);
@@ -55,8 +76,12 @@ const SideMenu = ({navigation, authDispatch}) => {
         // navigation.navigate(SETTINGS);
       },
     },
-    {icon: <Text>-</Text>, name: 'About'},
-    {icon: <Text>-</Text>, name: 'Check for updates'},
+
+    {
+      icon: <Icon size={21} name="infocirlceo" />,
+      name: 'About',
+    },
+    {icon: <Icon size={21} name="checkcircleo" />, name: 'Check for updates'},
   ];
   return (
     <DrawerContentScrollView>

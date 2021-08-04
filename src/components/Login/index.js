@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
@@ -11,7 +11,16 @@ import {REGISTER} from '../../constants/routeNames';
 import MainMessage from '../common/Message';
 
 const LoginComponent = ({error, loading, onSubmit, onChange}) => {
+  const [passShow, setPassShow] = useState(true);
   const {navigate} = useNavigation();
+
+  const passShowHandler = () => {
+    if (passShow) {
+      setPassShow(false);
+    } else {
+      setPassShow(true);
+    }
+  };
   return (
     <Container>
       <View style={styles.imageContainer}>
@@ -50,9 +59,13 @@ const LoginComponent = ({error, loading, onSubmit, onChange}) => {
 
           <Input
             label="Password"
-            secureTextEntry={true}
+            secureTextEntry={passShow}
             placeholder="Enter Password"
-            icon={<Text>SHOW</Text>}
+            icon={
+              <TouchableOpacity onPress={passShowHandler}>
+                <Text>{passShow ? 'SHOW' : 'HIDE'}</Text>
+              </TouchableOpacity>
+            }
             iconPosition="right"
             onChangeText={value => {
               onChange({name: 'password', value});

@@ -23,11 +23,11 @@ const Register = () => {
     });
   }, []);
 
-  React.useEffect(() => {
-    if (data) {
-      navigate(LOGIN);
-    }
-  }, [data]);
+  // React.useEffect(() => {
+  //   if (data) {
+  //     navigate(LOGIN);
+  //   }
+  // }, [data]);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -107,7 +107,9 @@ const Register = () => {
       Object.values(errors).every(item => !item)
     ) {
       console.log('reg-data varified: dispatching!', 1111);
-      register(form)(authDispatch);
+      register(form)(authDispatch)(response => {
+        navigate(LOGIN, {data: response});
+      });
     }
   };
 

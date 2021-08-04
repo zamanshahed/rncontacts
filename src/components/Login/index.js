@@ -10,7 +10,7 @@ import Colors from '../../assets/theme/colors';
 import {REGISTER} from '../../constants/routeNames';
 import MainMessage from '../common/Message';
 
-const LoginComponent = ({error, loading, onSubmit, onChange}) => {
+const LoginComponent = ({error, loading, onSubmit, onChange, form}) => {
   const [passShow, setPassShow] = useState(true);
   const {navigate} = useNavigation();
 
@@ -51,6 +51,7 @@ const LoginComponent = ({error, loading, onSubmit, onChange}) => {
           <Input
             label="Username"
             placeholder="Enter User name"
+            value={form.userName || null}
             onChangeText={value => {
               onChange({name: 'userName', value});
             }}

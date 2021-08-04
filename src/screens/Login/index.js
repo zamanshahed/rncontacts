@@ -1,11 +1,19 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useContext, useState} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {useContext, useEffect, useState} from 'react';
 import LoginComponent from '../../components/Login';
 import LoginUser from '../../context/actions/auth/LoginUser';
 import {GlobalContext} from '../../context/Provider';
 
 const Login = () => {
   const [form, setForm] = useState({});
+  const {params} = useRoute();
+
+  useEffect(() => {
+    if (params?.data) {
+      console.log('params: ', params);
+      setForm({...form, userName: params.data.username});
+    }
+  }, [params]);
 
   const {
     authDispatch,

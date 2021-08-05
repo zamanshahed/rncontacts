@@ -1,28 +1,37 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import colors from '../../assets/theme/colors';
 import Container from '../../components/common/Container/index';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import styles from '../../components/ContactComponent/styles';
+import ContactComponent from '../../components/ContactComponent';
 // import styles from './styles';
 
 const Contacts = () => {
   const {setOptions, toggleDrawer} = useNavigation();
+
+  const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(() => {
     setOptions({
+      headerStyle: {
+        height: 50,
+      },
       headerLeft: () => (
         <TouchableOpacity
           style={{
-            paddingHorizontal: 7,
-            paddingVertical: 9,
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingLeft: 12,
             // borderWidth: 1,
             // backgroundColor: 'red',
           }}
           onPress={() => {
             toggleDrawer();
           }}>
-          <Icon size={37} color={colors.accent} name="menu" />
+          <Icon size={27} color={colors.accent} name="menu" />
         </TouchableOpacity>
       ),
       headerTitle: () => (
@@ -39,9 +48,10 @@ const Contacts = () => {
     });
   }, []);
   return (
-    <Container style={{padding: 77}}>
-      <Text>Signal received from Contacts !!</Text>
-    </Container>
+    <ContactComponent
+      modalVisible={modalVisible}
+      setModalVisible={setModalVisible}
+    />
   );
 };
 

@@ -9,8 +9,8 @@ export default StyleSheet.create({
     // borderWidth: 2,
   },
   imageStyle: {
-    height: 130,
-    width: 130,
+    height: 160,
+    width: 160,
   },
   menuItemStyle: {
     flexDirection: 'row',

@@ -32,7 +32,7 @@ const AppNavContainer = () => {
   //using useEffect to check if something exists in the async storage
   useEffect(() => {
     getUser();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, isAuthenticated]);
 
   console.log('isAuthenticated : ', isAuthenticated);
   console.log('isLoggedIn : ', isLoggedIn);

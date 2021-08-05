@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import envs from '../../config/env';
 
 import RegisterComponent from '../../components/Register/index';
-import axiosInstance from '../../context/helpers/axiosInterceptor';
+import axiosInstance from '../../context/helpers/axiosInstance';
 import register, {clearAuthState} from '../../context/actions/auth/register';
 import {GlobalContext} from '../../context/Provider';
 import {LOGIN} from '../../constants/routeNames';

@@ -1,13 +1,41 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {
+  Image,
+  Text,
+  View,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import AppModal from '../common/AppModal';
 import Container from '../common/Container';
 import styles from './styles';
 import MainButton from '../../components/common/MainButton';
+import colors from '../../assets/theme/colors';
 
-const ContactComponent = ({modalVisible, setModalVisible}) => {
+const ContactComponent = ({modalVisible, setModalVisible, data, loading}) => {
+  const ListEmptyComponent = () => {
+    return (
+      <View style={{padding: 11}}>
+        <Text style={{color: colors.grey, fontSize: 26}}>
+          No contcts in your list !
+        </Text>
+      </View>
+    );
+  };
+
+  const renderItem = ({item}) => {
+    console.log('render item: ', item);
+    return (
+      <TouchableOpacity>
+        <Text>Contact One</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <Container style={{alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{alignItems: 'center', justifyContent: 'center'}}>
       <View style={styles.imageContainer}>
         <Image
           height={70}
@@ -35,14 +63,30 @@ const ContactComponent = ({modalVisible, setModalVisible}) => {
           </>
         }
       />
-      <MainButton
+      {/* <MainButton
         title="   modal-switch   "
         onPress={() => {
           setModalVisible(true);
         }}
-      />
+      /> */}
       <Text style={{fontSize: 24}}>Welcome HOME </Text>
-    </Container>
+
+      {loading && (
+        <View style={{paddingTop: 21}}>
+          <ActivityIndicator size="large" color={colors.accent} />
+        </View>
+      )}
+      {!loading && (
+        <FlatList
+          data={data}
+          ListEmptyComponent={ListEmptyComponent}
+          keyExtractor={item => {
+            String(item.id);
+          }}
+          renderItem={renderItem}
+        />
+      )}
+    </View>
   );
 };
 

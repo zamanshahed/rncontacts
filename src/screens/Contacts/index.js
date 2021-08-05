@@ -1,18 +1,34 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import colors from '../../assets/theme/colors';
-import Container from '../../components/common/Container/index';
-
+// import Container from '../../components/common/Container/index';
+import {GlobalContext} from '../../context/Provider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import styles from '../../components/ContactComponent/styles';
+// import styles from '../../components/ContactComponent/styles';
 import ContactComponent from '../../components/ContactComponent';
+import getContacts from '../../context/actions/contacts/getContacts';
 // import styles from './styles';
 
 const Contacts = () => {
   const {setOptions, toggleDrawer} = useNavigation();
 
   const [modalVisible, setModalVisible] = useState(false);
+
+  const {
+    contactDispatch,
+    contactState: {
+      getContacts: {data, loading, error},
+    },
+  } = useContext(GlobalContext);
+
+  console.log('data: ', data);
+  console.log('loading: ', loading);
+  console.log('error: ', error);
+
+  useEffect(() => {
+    getContacts()(contactDispatch);
+  }, []);
 
   useEffect(() => {
     setOptions({
@@ -51,6 +67,8 @@ const Contacts = () => {
     <ContactComponent
       modalVisible={modalVisible}
       setModalVisible={setModalVisible}
+      loading={loading}
+      data={data}
     />
   );
 };

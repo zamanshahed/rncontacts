@@ -28,7 +28,8 @@ const ContactComponent = ({modalVisible, setModalVisible, data, loading}) => {
 
   const renderItem = ({item}) => {
     console.log('array item: ', item);
-    const {contact_picture, first_name, last_name, phone_number} = item;
+    const {contact_picture, first_name, last_name, phone_number, country_code} =
+      item;
 
     return (
       <TouchableOpacity
@@ -75,10 +76,36 @@ const ContactComponent = ({modalVisible, setModalVisible, data, loading}) => {
           ) : (
             <View
               style={{
-                backgroundColor: colors.success,
-                // margin: 5,
+                backgroundColor: colors.grey,
                 borderRadius: 95,
-              }}></View>
+                borderColor: colors.grey,
+                borderWidth: 1,
+                height: 45,
+                width: 45,
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                color: colors.white,
+              }}>
+              <Text
+                style={{
+                  textTransform: 'uppercase',
+                  fontWeight: '700',
+                  fontSize: 18,
+                  color: colors.white,
+                }}>
+                {first_name[0]}
+              </Text>
+              <Text
+                style={{
+                  color: colors.white,
+                  textTransform: 'uppercase',
+                  fontWeight: 'bold',
+                  fontSize: 18,
+                }}>
+                {last_name[0]}
+              </Text>
+            </View>
           )}
 
           <View>
@@ -91,12 +118,18 @@ const ContactComponent = ({modalVisible, setModalVisible, data, loading}) => {
               <Text style={styles.textStyle}>{first_name}</Text>
               <Text style={styles.textStyle}>{last_name}</Text>
             </View>
-            <Text style={{color: colors.grey, fontSize: 15, paddingLeft: 18}}>
-              {phone_number}
+            <Text
+              style={{
+                opacity: 0.5,
+                color: 'black',
+                fontSize: 15,
+                paddingLeft: 18,
+              }}>
+              +{country_code}-{phone_number}
             </Text>
           </View>
         </View>
-        <Icon style={{paddingLeft: 22}} size={17} name="rightcircleo" />
+        <Icon style={{opacity: 0.4}} size={19} name="rightcircleo" />
       </TouchableOpacity>
     );
   };
@@ -150,12 +183,13 @@ const ContactComponent = ({modalVisible, setModalVisible, data, loading}) => {
           <FlatList
             data={data}
             ListEmptyComponent={ListEmptyComponent}
-            keyExtractor={item => {
-              String(item.id);
-            }}
+            key={data.id}
             renderItem={renderItem}
             ListFooterComponent={<View style={{height: 55}}></View>}
             ListHeaderComponent={<View style={{height: 25}}></View>}
+            ItemSeparatorComponent={() => (
+              <View style={{height: 1, backgroundColor: colors.grey}}></View>
+            )}
           />
         </View>
       )}

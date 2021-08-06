@@ -7,4 +7,15 @@ export default StyleSheet.create({
     paddingLeft: 9,
     fontWeight: '500',
   },
+  floatingActionBtn: {
+    width: 50,
+    height: 50,
+    backgroundColor: colors.accent,
+    position: 'absolute',
+    bottom: '5%',
+    right: '5%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 90,
+  },
 });

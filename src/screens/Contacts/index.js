@@ -22,9 +22,9 @@ const Contacts = () => {
     },
   } = useContext(GlobalContext);
 
-  console.log('data: ', data);
-  console.log('loading: ', loading);
-  console.log('error: ', error);
+  // console.log('data: ', data);
+  // console.log('loading: ', loading);
+  // console.log('error: ', error);
 
   useEffect(() => {
     getContacts()(contactDispatch);

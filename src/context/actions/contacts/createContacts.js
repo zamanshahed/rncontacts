@@ -5,7 +5,7 @@ import {
 } from '../../../constants/actionTypes';
 import axiosInstance from '../../helpers/axiosInstance';
 
-export default form => dispatch => {
+export default form => dispatch => onSuccess => {
   const requestPayload = {
     country_code: form.country_code || '',
     first_name: form.first_name || '',
@@ -29,6 +29,7 @@ export default form => dispatch => {
         payload: res.data,
       });
       console.log('CREATE_CONTACTS_SUCCESS');
+      onSuccess();
     })
     .catch(err => {
       console.log('CREATE_CONTACTS error: ', err.response);

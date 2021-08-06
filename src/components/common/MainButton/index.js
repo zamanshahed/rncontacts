@@ -35,7 +35,11 @@ const MainButton = ({
         {loading && (
           <ActivityIndicator color={Colors.white} style={{paddingRight: 8}} />
         )}
-        {title && <Text style={styles.titleStyle}>{title}</Text>}
+        {title && (
+          <Text style={styles.titleStyle}>
+            {loading ? 'Please wait' : title}
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );

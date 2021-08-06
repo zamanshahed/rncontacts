@@ -8,7 +8,14 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../assets/theme/colors';
 
-const CreateContactComponent = ({onChangeText, form, onSubmit, setForm}) => {
+const CreateContactComponent = ({
+  onChangeText,
+  form,
+  onSubmit,
+  setForm,
+  loading,
+  error,
+}) => {
   const [currentCca2, setCurrentCca2] = useState('');
   return (
     <View
@@ -19,15 +26,13 @@ const CreateContactComponent = ({onChangeText, form, onSubmit, setForm}) => {
           width: '100%',
         }}>
         <View style={styles.userImage}>
-          <View style={styles.iconBorder}>
-            <Icon size={93} name="user" color={colors.primary} />
-            <MaterialIcon
-              style={styles.secondaryIcon}
-              color={colors.danger}
-              name="camera-plus"
-              size={42}
-            />
-          </View>
+          <Icon size={63} name="user" color={colors.primary} />
+          <MaterialIcon
+            style={styles.secondaryIcon}
+            color={colors.danger}
+            name="camera-plus"
+            size={29}
+          />
         </View>
 
         <View style={styles.inputStyle}>
@@ -37,6 +42,7 @@ const CreateContactComponent = ({onChangeText, form, onSubmit, setForm}) => {
             onChangeText={value => {
               onChangeText({name: 'first_name', value: value});
             }}
+            error={error?.first_name?.[0]}
           />
           <Input
             label="Last Name"
@@ -44,6 +50,7 @@ const CreateContactComponent = ({onChangeText, form, onSubmit, setForm}) => {
             onChangeText={value => {
               onChangeText({name: 'last_name', value: value});
             }}
+            error={error?.last_name?.[0]}
           />
           <Input
             icon={
@@ -71,8 +78,14 @@ const CreateContactComponent = ({onChangeText, form, onSubmit, setForm}) => {
             onChangeText={value => {
               onChangeText({name: 'phone_number', value: value});
             }}
+            error={error?.phone_number?.[0]}
           />
-          <MainButton title="Submit" onPress={onSubmit} />
+          <MainButton
+            loading={loading}
+            disabled={loading}
+            title="Submit"
+            onPress={onSubmit}
+          />
         </View>
       </ScrollView>
     </View>

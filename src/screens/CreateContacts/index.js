@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
-import {View, Text} from 'react-native';
+import React, {useContext, useState} from 'react';
+
+import {GlobalContext} from '../../context/Provider';
 import CreateContactComponent from '../../components/CreateContactComponent';
+import createContacts from '../../context/actions/contacts/createContacts';
 
 const CreateContacts = () => {
+  const {contactDispatch} = useContext(GlobalContext);
   const [form, setFrom] = useState({});
 
   const onChangeText = ({name, value}) => {
@@ -12,6 +15,7 @@ const CreateContacts = () => {
   const onSubmit = () => {
     console.log('submit clicked! ', 111);
     console.log('form: ', form);
+    createContacts(form)(contactDispatch);
   };
 
   return (

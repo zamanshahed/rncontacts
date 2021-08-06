@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import MainButton from '../common/MainButton';
 import styles from './styles';
@@ -9,6 +9,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../assets/theme/colors';
 
 const CreateContactComponent = ({onChangeText, form, onSubmit, setForm}) => {
+  const [currentCca2, setCurrentCca2] = useState('');
   return (
     <View
     //  style={styles.container}
@@ -49,20 +50,17 @@ const CreateContactComponent = ({onChangeText, form, onSubmit, setForm}) => {
               <CountryPicker
                 withFilter
                 withFlag
-                countryCode={form.current_cca2}
-                withCountryNameButton={false}
+                countryCode={currentCca2}
+                withCountryNameButton={true}
                 withCallingCodeButton
                 withEmoji
-                onSelect={country_code => {
-                  onChangeText({
-                    name: 'country_code',
-                    value: String(country_code.callingCode),
-                  });
-                  const current_cca2 = country_code.cca2;
-                  onChangeText({
-                    name: 'current_cca2',
-                    value: current_cca2,
-                  });
+                onSelect={v => {
+                  const current_cca2 = v.cca2;
+                  setCurrentCca2(current_cca2);
+                  const country_code = String(v.callingCode);
+                  onChangeText({name: 'country_code', value: country_code});
+                  console.log('country_code: ', country_code);
+                  console.log('cca2: ', current_cca2);
                 }}
               />
             }

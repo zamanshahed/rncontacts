@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../assets/theme/colors';
 
-const CreateContactComponent = props => {
+const CreateContactComponent = ({onChangeText, form, onSubmit, setForm}) => {
   return (
     <View
     //  style={styles.container}
@@ -30,25 +30,51 @@ const CreateContactComponent = props => {
         </View>
 
         <View style={styles.inputStyle}>
-          <Input label="First Name" placeholder="Enter First Name" />
-          <Input label="Last Name" placeholder="Enter Last Name" />
+          <Input
+            label="First Name"
+            placeholder="Enter First Name"
+            onChangeText={value => {
+              onChangeText({name: 'first_name', value: value});
+            }}
+          />
+          <Input
+            label="Last Name"
+            placeholder="Enter Last Name"
+            onChangeText={value => {
+              onChangeText({name: 'last_name', value: value});
+            }}
+          />
           <Input
             icon={
               <CountryPicker
                 withFilter
                 withFlag
+                countryCode={form.current_cca2}
                 withCountryNameButton={false}
-                withCallingCode={true}
+                withCallingCodeButton
                 withEmoji
-                onSelect={() => {}}
+                onSelect={country_code => {
+                  onChangeText({
+                    name: 'country_code',
+                    value: String(country_code.callingCode),
+                  });
+                  const current_cca2 = country_code.cca2;
+                  onChangeText({
+                    name: 'current_cca2',
+                    value: current_cca2,
+                  });
+                }}
               />
             }
             style={{paddingLeft: 15}}
             iconPosition="left"
             label="Phone Number"
             placeholder="Enter Phone Number"
+            onChangeText={value => {
+              onChangeText({name: 'phone_number', value: value});
+            }}
           />
-          <MainButton title="Submit" />
+          <MainButton title="Submit" onPress={onSubmit} />
         </View>
       </ScrollView>
     </View>

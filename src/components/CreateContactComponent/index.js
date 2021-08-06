@@ -4,6 +4,9 @@ import MainButton from '../common/MainButton';
 import styles from './styles';
 import Input from '../common/Input';
 import CountryPicker from 'react-native-country-picker-modal';
+import Icon from 'react-native-vector-icons/AntDesign';
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import colors from '../../assets/theme/colors';
 
 const CreateContactComponent = props => {
   return (
@@ -14,7 +17,17 @@ const CreateContactComponent = props => {
         style={{
           width: '100%',
         }}>
-        <Text>Create Contacts</Text>
+        <View style={styles.userImage}>
+          <View style={styles.iconBorder}>
+            <Icon size={93} name="user" color={colors.primary} />
+            <MaterialIcon
+              style={styles.secondaryIcon}
+              color={colors.danger}
+              name="camera-plus"
+              size={42}
+            />
+          </View>
+        </View>
 
         <View style={styles.inputStyle}>
           <Input label="First Name" placeholder="Enter First Name" />
@@ -35,12 +48,6 @@ const CreateContactComponent = props => {
             label="Phone Number"
             placeholder="Enter Phone Number"
           />
-
-          <Input label="First Name" placeholder="Enter First Name" />
-          <Input label="First Name" placeholder="Enter First Name" />
-          <Input label="First Name" placeholder="Enter First Name" />
-          <Input label="First Name" placeholder="Enter First Name" />
-
           <MainButton title="Submit" />
         </View>
       </ScrollView>

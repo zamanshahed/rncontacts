@@ -1,10 +1,11 @@
 import React, {useContext, useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
 
 import {GlobalContext} from '../../context/Provider';
 import CreateContactComponent from '../../components/CreateContactComponent';
 import createContacts from '../../context/actions/contacts/createContacts';
-import CONTACT_LIST from '../../constants/routeNames';
+
+import {useNavigation} from '@react-navigation/native';
+import {CONTACT_LIST} from '../../constants/routeNames';
 
 const CreateContacts = () => {
   const {
@@ -24,8 +25,7 @@ const CreateContacts = () => {
 
   const onSubmit = () => {
     createContacts(form)(contactDispatch)(() => {
-      navigation.navigate(CONTACT_LIST);
-      console.log('Called navigate(CONTACT_LIST) ! ', 111);
+      navigate(CONTACT_LIST, {screen: 'Contacts'});
     });
   };
 

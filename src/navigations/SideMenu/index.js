@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import Container from '../../components/common/Container';
-import {CONTACT_LIST, SETTINGS} from '../../constants/routeNames';
+import {CONTACT_LIST, LOGIN, SETTINGS} from '../../constants/routeNames';
 import LogoutUser from '../../context/actions/auth/LogoutUser';
 
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -18,8 +18,10 @@ import MaterialIconPro from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
+// import {useNavigation} from '@react-navigation/native';
 
 const SideMenu = ({navigation, authDispatch}) => {
+  // const {navigate} = useNavigation();
   const userLogoutHandler = () => {
     navigation.toggleDrawer();
     Alert.alert('Logout !', 'Are you sure you want to logout?', [
@@ -31,6 +33,7 @@ const SideMenu = ({navigation, authDispatch}) => {
         text: 'Yes',
         onPress: () => {
           LogoutUser()(authDispatch);
+          navigation.navigate(CONTACT_LIST, {screen: 'Login'});
         },
       },
     ]);

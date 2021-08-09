@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, Switch} from 'react-native';
 import MainButton from '../common/MainButton';
 import styles from './styles';
 import Input from '../common/Input';
@@ -15,8 +15,10 @@ const CreateContactComponent = ({
   setForm,
   loading,
   error,
+  toggleSwitchHandler,
 }) => {
   const [currentCca2, setCurrentCca2] = useState('');
+
   return (
     <View
     //  style={styles.container}
@@ -80,6 +82,25 @@ const CreateContactComponent = ({
             }}
             error={error?.phone_number?.[0]}
           />
+
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingVertical: 8,
+            }}>
+            <Text style={{paddingRight: 11}}>Add to favourites</Text>
+            {form.is_favourite === undefined &&
+              (form.is_favourite = form.is_favourite)}
+            <Switch
+              trackColor={{false: colors.grey, true: colors.accent}}
+              thumbColor={form.is_favourite ? colors.success : colors.danger}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitchHandler}
+              value={form.is_favourite}
+            />
+          </View>
           <MainButton
             loading={loading}
             disabled={loading}

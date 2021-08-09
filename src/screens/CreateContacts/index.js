@@ -25,8 +25,14 @@ const CreateContacts = () => {
 
   const onSubmit = () => {
     createContacts(form)(contactDispatch)(() => {
+      console.log('form: ', form);
       navigate(CONTACT_LIST, {screen: 'Contacts'});
     });
+  };
+
+  const toggleSwitchHandler = () => {
+    setFrom({...form, is_favourite: !form.is_favourite});
+    console.log('form.is_favourite: ', form.is_favourite);
   };
 
   // console.log('create contact Loading: ', loading);
@@ -40,6 +46,7 @@ const CreateContacts = () => {
       setFrom={setFrom}
       loading={loading}
       error={error}
+      toggleSwitchHandler={toggleSwitchHandler}
     />
   );
 };

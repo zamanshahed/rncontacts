@@ -6,13 +6,15 @@ import {
 import axiosInstance from '../../helpers/axiosInstance';
 
 export default form => dispatch => onSuccess => {
+  // console.log('form.is_favourite: ', form.is_favourite);
+
   const requestPayload = {
     country_code: form.country_code || '',
     first_name: form.first_name || '',
     last_name: form.last_name || '',
     phone_number: form.phone_number || '',
     contact_picture: form.contact_picture || null,
-    is_favorite: true,
+    is_favorite: form.is_favorite || false,
   };
   dispatch({
     type: CREATE_CONTACTS_LOADING,

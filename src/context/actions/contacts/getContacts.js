@@ -14,7 +14,7 @@ export default () => dispatch => {
     .get('/contacts/')
     .then(res => {
       //res = response from API
-      console.log('getContacts ~ res-data: >>> ', res.data);
+      // console.log('getContacts ~ res-data: >>> ', res.data);
       dispatch({
         //on success response:
         type: GET_CONTACTS_SUCCESS,

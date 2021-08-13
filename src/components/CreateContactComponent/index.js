@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, ScrollView, Switch} from 'react-native';
+import {View, Text, ScrollView, Switch, TouchableOpacity} from 'react-native';
 import MainButton from '../common/MainButton';
 import styles from './styles';
 import Input from '../common/Input';
 import CountryPicker from 'react-native-country-picker-modal';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../assets/theme/colors';
+import ImagePicker from '../common/ImagePicker';
 
 const CreateContactComponent = ({
   onChangeText,
@@ -16,6 +17,9 @@ const CreateContactComponent = ({
   loading,
   error,
   toggleSwitchHandler,
+  sheetRef,
+  openSheet,
+  closeSheet,
 }) => {
   const [currentCca2, setCurrentCca2] = useState('');
 
@@ -27,14 +31,13 @@ const CreateContactComponent = ({
         style={{
           width: '100%',
         }}>
-        <View style={styles.userImage}>
-          <Icon size={63} name="user" color={colors.primary} />
-          <MaterialIcon
-            style={styles.secondaryIcon}
-            color={colors.danger}
-            name="camera-plus"
-            size={29}
-          />
+        <View style={styles.secondaryIcon}>
+          <View style={styles.userImage}>
+            <TouchableOpacity onPress={openSheet}>
+              <Icon size={82} name="user-alt" color={colors.white} />
+              <Text style={styles.imageText}>Choose image</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.inputStyle}>
@@ -109,6 +112,7 @@ const CreateContactComponent = ({
           />
         </View>
       </ScrollView>
+      <ImagePicker ref={sheetRef} />
     </View>
   );
 };

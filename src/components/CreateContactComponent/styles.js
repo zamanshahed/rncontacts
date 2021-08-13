@@ -4,30 +4,29 @@ export default StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    // flex: 1,
   },
   inputStyle: {
     paddingHorizontal: 11,
   },
   userImage: {
+    borderRadius: 195,
+    backgroundColor: colors.accent,
+    height: 130,
+    width: 130,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 11,
+    paddingBottom: 9,
   },
   secondaryIcon: {
-    marginTop: -21,
-    // backgroundColor: 'white',
-    borderRadius: 4,
-    padding: 9,
-    marginLeft: 36,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  iconBorder: {
-    width: 110,
-    height: 110,
-    borderWidth: 4,
-    borderRadius: 100,
-    paddingLeft: 18,
-    paddingTop: 5,
-    borderColor: colors.primary,
+  imageText: {
+    color: colors.white,
+    fontSize: 13,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    paddingBottom: 5,
   },
 });

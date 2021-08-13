@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 
 import {GlobalContext} from '../../context/Provider';
 import CreateContactComponent from '../../components/CreateContactComponent';
@@ -14,6 +14,8 @@ const CreateContacts = () => {
       createContacts: {loading, error, data},
     },
   } = useContext(GlobalContext);
+
+  const sheetRef = useRef(null);
 
   const [form, setFrom] = useState({});
 
@@ -38,6 +40,18 @@ const CreateContacts = () => {
   // console.log('create contact Loading: ', loading);
   // console.log('create contact Error: ', error);
 
+  const closeSheet = () => {
+    if (sheetRef.current) {
+      sheetRef.current.close();
+    }
+  };
+
+  const openSheet = () => {
+    if (sheetRef.current) {
+      sheetRef.current.open();
+    }
+  };
+
   return (
     <CreateContactComponent
       onChangeText={onChangeText}
@@ -47,6 +61,9 @@ const CreateContacts = () => {
       loading={loading}
       error={error}
       toggleSwitchHandler={toggleSwitchHandler}
+      sheetRef={sheetRef}
+      closeSheet={closeSheet}
+      openSheet={openSheet}
     />
   );
 };
